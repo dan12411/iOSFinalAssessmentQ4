@@ -9,5 +9,10 @@
 import UIKit
 
 class MyCollectionViewCell: UICollectionViewCell {
+ 
+    @IBOutlet weak var myView: UIView!
+    @IBOutlet weak var taskLabel: UILabel!
+    
+    var selectCell: Bool = false
     
 }
