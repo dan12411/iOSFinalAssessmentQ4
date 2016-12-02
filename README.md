@@ -26,7 +26,7 @@
 
 8. colorChange() - 藉由添加變數 selectCell (Bool)，來判斷＆控制 background color
 
-9. 
+9. Privacy - Motion Usage Description
 
 ---
 
