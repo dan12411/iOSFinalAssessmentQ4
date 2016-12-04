@@ -8,10 +8,11 @@
 
 import UIKit
 import CoreMotion
+import MessageUI
 
 private let reuseIdentifier = "Cell"
 
-class MyCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MyCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate {
     
     let pedometer = CMPedometer()
     
@@ -25,18 +26,7 @@ class MyCollectionViewController: UICollectionViewController, UICollectionViewDe
         
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     // MARK: UICollectionViewDataSource
-    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -77,14 +67,13 @@ class MyCollectionViewController: UICollectionViewController, UICollectionViewDe
     }
     
     // MARK: UICollectionViewDelegate
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath) as! MyCollectionViewCell
         
         // for cell indexPath 0
         func alertCell() {
-            let alert = UIAlertController(title: "🍎P P A P✏️", message: "I have an apple,\n I have a pen,\napplePen!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "🍎P P A P✏️", message: "I have a pen,\n I have an apple,\napplePen!", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
@@ -104,6 +93,9 @@ class MyCollectionViewController: UICollectionViewController, UICollectionViewDe
         
         // for cell indexPath 2
         func requestPedometerData() {
+            
+            cell.taskLabel.text = "0 steps"
+            
             if(CMPedometer.isStepCountingAvailable()) {
                 self.pedometer.startUpdates(from: Date()) {
                     (data, error) in
@@ -128,45 +120,52 @@ class MyCollectionViewController: UICollectionViewController, UICollectionViewDe
             }
         }
         
+        // for cell indexPath 3
+        func openAPPSetting() {
+            let settingsUrl = NSURL(string:UIApplicationOpenSettingsURLString) as! URL
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+        }
+        
+        // for cell indexPath 4
+        func openGoogleMap() {
+            let settingsUrl = NSURL(string:"comgooglemaps://?center=40.765819,-73.975866&zoom=14&views=traffic") as! URL
+            if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+            } else {
+                NSLog("Can't use Google Maps")
+            }
+        }
+        
+        // for cell indexPath 5
+        func sendMail() {
+            // 1. Check Mail Box exist
+            if  MFMailComposeViewController.canSendMail() {
+                let mailController = MFMailComposeViewController()
+                // 3. set mail title
+                mailController.setSubject("測試信件")
+                
+                self.present(mailController, animated: true, completion: nil)
+                mailController.mailComposeDelegate = self
+                
+            } else {
+                let alert = UIAlertController(title: "你必須先要有個信箱", message: nil, preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
         switch indexPath.row {
         case 0 : alertCell()
         case 1 : colorChange()
         case 2 : requestPedometerData()
-        case 3 : return
-        case 4 : return
-        case 5 : return
+        case 3 : openAPPSetting()
+        case 4 : openGoogleMap()
+        case 5 : sendMail()
         default : return
         }
     }
     
-    
-    /*
-     // Uncƒomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
-    
+    // For Mail Finished Action
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
 }
