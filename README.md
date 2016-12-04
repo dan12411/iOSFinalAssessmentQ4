@@ -46,16 +46,16 @@
 
 參考資料：
 
-1. ![CMPedometer](http://stackoverflow.com/questions/38412977/cmpedometer-in-ios-10)...計步器
+1. [CMPedometer](http://stackoverflow.com/questions/38412977/cmpedometer-in-ios-10)...計步器
 
-2. ![Domain=CMErrorDomain Code=103](http://stackoverflow.com/questions/28145158/what-does-cmerrordomain-error-103-mean-cmpedometer)..要使用全域變數才能執行計步器
+2. [Domain=CMErrorDomain Code=103](http://stackoverflow.com/questions/28145158/what-does-cmerrordomain-error-103-mean-cmpedometer)..要使用全域變數才能執行計步器
 
-3. ![CoreMotion Sample Code](https://github.com/shinobicontrols/iOS8-day-by-day/blob/master/35-coremotion/LocoMotion/LocoMotion/LiveViewController.swift)
+3. [CoreMotion Sample Code](https://github.com/shinobicontrols/iOS8-day-by-day/blob/master/35-coremotion/LocoMotion/LocoMotion/LiveViewController.swift)
 
-4. ![open APP setting](http://stackoverflow.com/questions/39792745/ios-10-open-settings-crash)...iOS 10之後，語法不同了
+4. [open APP setting](http://stackoverflow.com/questions/39792745/ios-10-open-settings-crash)...iOS 10之後，語法不同了
 
-5. ![Google map API](https://developers.google.com/maps/premium/ios-get-started)
+5. [Google map API](https://developers.google.com/maps/premium/ios-get-started)
 
-6. ![OSStatus - 10814](https://www.osstatus.com/search/results?platform=all&framework=all&search=10814)...其實就是模擬器裡面沒有google map app，改用實機(有google map)就可以打開了，知道錯誤訊息代表什麼很重要，才不會浪費太多時間...
+6. [OSStatus - 10814](https://www.osstatus.com/search/results?platform=all&framework=all&search=10814)...其實就是模擬器裡面沒有google map app，改用實機(有google map)就可以打開了，知道錯誤訊息代表什麼很重要，才不會浪費太多時間...
 
 
