@@ -42,6 +42,8 @@
 
 12. cell indexPath 5 : sendMail() - 參考Peter Pan上課的code
 
+![](https://github.com/dan12411/iOSFinalAssessmentQ4/blob/master/Q4_Demo.gif)
+
 ---
 
 參考資料：
